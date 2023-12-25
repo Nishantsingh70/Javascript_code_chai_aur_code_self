@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chai aur Code | DOM</title>
+</head>
+<body style="background-color: #212121; color:#fff;">
+    <ul class="language">
+        <li> Javascript </li>
+    </ul>
+</body>
+
+<script>
+    // Add/Insert
+    function addLanguage(language)
+    {
+       const li = document.createElement('li')
+        li.innerHTML = `${language}` // when we use innerHTML than travering will happened which is not good for optimizations.
+        document.querySelector('.language').appendChild(li)
+    }
+    addLanguage('Python')
+    addLanguage('Java')
+
+    // Add/Insert
+    function addOptimizeLanguage(language){
+        const li = document.createElement('li')
+        li.appendChild(document.createTextNode(language))  // optimized way to create code
+        document.querySelector('.language').appendChild(li)
+    }
+    addOptimizeLanguage('golang')
+
+    // Edit
+    // const firstLang = document.querySelector('li:nth-child(1)')
+    const firstLang = document.querySelector('li:first-child')
+    firstLang.outerHTML = '<li>TypeScript</li>'
+ 
+    // Edit
+    let secondLang = document.querySelector('li:nth-child(2)')
+    console.log(secondLang)
+    secondLang.innerHTML = "Mojo"
+ 
+    // Edit
+    secondLang = document.querySelector('li:nth-child(2)')
+    console.log(secondLang)
+    const newli = document.createElement('li')
+    newli.appendChild(document.createTextNode("Mojo1"))
+    secondLang.replaceWith(newli)
+    
+    //remove
+    const lastLang = document.querySelector('li:last-child')
+    lastLang.remove()
+</script>
+</html>
