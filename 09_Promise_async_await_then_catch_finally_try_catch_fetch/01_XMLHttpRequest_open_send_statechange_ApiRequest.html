@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="background-color: #212121; color:#ffffff">
+
+
+<!-- 0	UNSENT	Client has been created. open() not called yet. <br />
+1	OPENED	open() has been called. <br />
+2	HEADERS_RECEIVED	send() has been called, and headers and status are available. <br />
+3	LOADING	Downloading; responseText holds partial data. <br />
+4	DONE	The operation is complete. -->
+
+<div id="d1"></div>
+<div id="d2"></div>
+<h2 id="h2" >Please Click on print button to print the github profile picture and followers count.</h2><br />
+<button id="b1">Print</button>
+
+</body>
+<script>
+
+    // https://api.github.com/users/Nishantsingh70
+    // https://api.github.com/users/hiteshchoudhary
+    // https://randomuser.me/
+
+    const div1 = document.querySelector('#d1')
+    const div2 = document.querySelector('#d2')
+    const h2 = document.querySelector('#h2')
+    const button1 = document.querySelector('#b1')
+    button1.addEventListener('click', function() {
+
+        const requestUrl = 'https://api.github.com/users/Nishantsingh70'
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', requestUrl)
+        console.log(xhr.readyState);
+        xhr.onreadystatechange = function(){
+            console.log(xhr.readyState);
+            if (xhr.readyState === 4) {
+                const data = JSON.parse(this.responseText);
+                console.log(typeof data);
+                console.log(data.followers);
+                console.log(data.avatar_url);
+                div1.outerHTML = `<img id="img1" src="${data.avatar_url}"></img>`
+                //div2.innerHTML = `Total followers count is ${data.followers}` 
+                div2.appendChild(document.createTextNode(`Total followers count is ${data.followers}`))
+                h2.innerHTML = ''
+                button1.setAttribute("hidden", "hidden");
+            }
+        }
+        xhr.send();
+    });
+
+</script>
+</html>
